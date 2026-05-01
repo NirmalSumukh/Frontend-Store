@@ -1,0 +1,27 @@
+# ─── Development Dockerfile ───────────────────────────────────────────────────
+# Runs Vite dev server with Hot Module Replacement (HMR)
+
+FROM node:20-alpine
+
+RUN apk add --no-cache git curl python3 make g++
+
+WORKDIR /app
+
+COPY package*.json ./
+RUN npm install
+
+COPY . .
+
+# Seed a .env.local if one is not bind-mounted
+RUN if [ ! -f .env.local ]; then \
+    echo "VITE_SALEOR_API_URL=https://saleor.leemasmart.com/graphql/" > .env.local && \
+    echo "VITE_SITE_NAME=Leema" >> .env.local && \
+    echo "VITE_SHIPROCKET_APP_URL=https://shiprocket.leemasmart.com" >> .env.local && \
+    echo "VITE_TOKEN_STORAGE_KEY=authToken" >> .env.local && \
+    echo "VITE_REFRESH_TOKEN_KEY=refreshToken" >> .env.local; \
+    fi
+
+# Vite dev port + HMR websocket port
+EXPOSE 3000 24678
+
+CMD ["npm", "run", "dev", "--", "--host", "0.0.0.0", "--port", "3000"]

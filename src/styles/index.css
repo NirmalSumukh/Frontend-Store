@@ -1,0 +1,133 @@
+/* ========================================
+   VITE + REACT + TAILWIND ENTRY POINT
+   Import order matters - DO NOT CHANGE
+   ======================================== */
+
+/* 1. Google Fonts Import - Electrolize */
+@import url('https://fonts.googleapis.com/css2?family=Electrolize:wght@400&display=swap');
+
+/* 2. Tailwind Base (includes preflight reset) */
+/* 3. Import Design System Variables */
+@import './globals.css';
+
+/* 2. Tailwind Base (includes preflight reset) */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ========================================
+   GLOBAL FONT SETUP - ELECTROLIZE
+   ======================================== */
+
+html,
+body,
+#root,
+* {
+  font-family: "Electrolize", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+/* Ensure Tailwind classes can override if needed */
+.font-electrolize {
+  font-family: "Electrolize", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+/* ========================================
+   MINIMAL BASE OVERRIDES
+   Only essential browser resets
+   ======================================== */
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100vh;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+#root {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+}
+
+/* ========================================
+   SCROLLBAR CUSTOMIZATION - FIXED
+   ======================================== */
+
+/* Webkit Browsers (Chrome, Safari, Edge) */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+  /* FIXED: Remove white line */
+}
+
+::-webkit-scrollbar-thumb {
+  background: #717182;
+  /* var(--muted-foreground) */
+  border-radius: 5px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: oklch(0.145 0 0);
+  /* var(--foreground) - darker on hover */
+  background-clip: padding-box;
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #717182 transparent;
+}
+
+/* ========================================
+   SMOOTH SCROLL & ACCESSIBILITY
+   ======================================== */
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* ========================================
+   IMAGE OPTIMIZATION
+   ======================================== */
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+img[loading="lazy"] {
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+img[loading="lazy"].loaded {
+  opacity: 1;
+}

@@ -1,0 +1,52 @@
+{
+  "name": "E-Commerce Frontend (Dev)",
+  "dockerFile": "../Dockerfile.dev",
+  "context": "..",
+  "workspaceFolder": "/app",
+
+  // Mount local source so edits reflect immediately inside the container
+  "mounts": [
+    "source=${localWorkspaceFolder},target=/app,type=bind,consistency=cached",
+    // Persist node_modules inside the container volume for speed
+    "source=ecommerce-frontend-node_modules,target=/app/node_modules,type=volume"
+  ],
+
+  // Forward Vite dev port and HMR websocket port
+  "forwardPorts": [3000, 24678],
+  "portsAttributes": {
+    "3000": { "label": "Vite Dev Server", "onAutoForward": "openBrowser" },
+    "24678": { "label": "Vite HMR" }
+  },
+
+  // Copy .env.example to .env.local if missing, then install deps
+  "postCreateCommand": "if [ ! -f .env.local ]; then cp .env.example .env.local; fi && npm install",
+
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "bradlc.vscode-tailwindcss",
+        "ms-vscode.vscode-typescript-next",
+        "formulahendry.auto-rename-tag",
+        "dsznajder.es7-react-js-snippets",
+        "GraphQL.vscode-graphql-syntax",
+        "ms-azuretools.vscode-docker"
+      ],
+      "settings": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.formatOnSave": true,
+        "editor.codeActionsOnSave": {
+          "source.fixAll.eslint": "explicit"
+        },
+        "typescript.tsdk": "node_modules/typescript/lib",
+        "tailwindCSS.includeLanguages": {
+          "typescript": "javascript",
+          "typescriptreact": "javascript"
+        }
+      }
+    }
+  },
+
+  "remoteUser": "node"
+}

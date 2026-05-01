@@ -1,0 +1,281 @@
+{
+  "data": {
+    "pages": {
+      "edges": [
+        {
+          "node": {
+            "title": "32\" Inch Banner",
+            "attributes": [
+              {
+                "attribute": {
+                  "name": "Carsosel Heading",
+                  "slug": "carsosel-heading"
+                },
+                "values": [
+                  {
+                    "name": "32\" TV",
+                    "value": "",
+                    "richText": null,
+                    "plainText": "32\" TV"
+                  }
+                ]
+              },
+              {
+                "attribute": {
+                  "name": "Carousel Description",
+                  "slug": "carousel-description"
+                },
+                "values": [
+                  {
+                    "name": "Best budget choice",
+                    "value": "",
+                    "richText": null,
+                    "plainText": "Best budget choice"
+                  }
+                ]
+              },
+              {
+                "attribute": {
+                  "name": "Carousel Image",
+                  "slug": "carousel-image"
+                },
+                "values": [
+                  {
+                    "name": "leema_a%2B_banner_32_inch_tv_ce12b716.png",
+                    "value": "",
+                    "richText": null,
+                    "plainText": null
+                  }
+                ]
+              },
+              {
+                "attribute": {
+                  "name": "Carousel Link",
+                  "slug": "carousel-link"
+                },
+                "values": [
+                  {
+                    "name": "Leema 32\" TV : Leema 32\" Android Smart TV Android HD",
+                    "value": "",
+                    "richText": null,
+                    "plainText": null
+                  }
+                ]
+              }
+            ],
+            "metadata": []
+          }
+        },
+        {
+          "node": {
+            "title": "55\" Banner",
+            "attributes": [
+              {
+                "attribute": {
+                  "name": "Carsosel Heading",
+                  "slug": "carsosel-heading"
+                },
+                "values": [
+                  {
+                    "name": "55\" TV",
+                    "value": "",
+                    "richText": null,
+                    "plainText": "55\" TV"
+                  }
+                ]
+              },
+              {
+                "attribute": {
+                  "name": "Carousel Description",
+                  "slug": "carousel-description"
+                },
+                "values": [
+                  {
+                    "name": "Best for home",
+                    "value": "",
+                    "richText": null,
+                    "plainText": "Best for home"
+                  }
+                ]
+              },
+              {
+                "attribute": {
+                  "name": "Carousel Image",
+                  "slug": "carousel-image"
+                },
+                "values": [
+                  {
+                    "name": "leema_a%2B_banner_55_inches__6620a6ad.png",
+                    "value": "",
+                    "richText": null,
+                    "plainText": null
+                  }
+                ]
+              },
+              {
+                "attribute": {
+                  "name": "Carousel Link",
+                  "slug": "carousel-link"
+                },
+                "values": [
+                  {
+                    "name": "Leema 55\" TV: Leema 55\" Google OS 4K QLED",
+                    "value": "",
+                    "richText": null,
+                    "plainText": null
+                  }
+                ]
+              }
+            ],
+            "metadata": []
+          }
+        },
+        {
+          "node": {
+            "title": "About Us",
+            "attributes": [],
+            "metadata": []
+          }
+        },
+        {
+          "node": {
+            "title": "Charger Banner",
+            "attributes": [
+              {
+                "attribute": {
+                  "name": "Carsosel Heading",
+                  "slug": "carsosel-heading"
+                },
+                "values": [
+                  {
+                    "name": "Leema Charger",
+                    "value": "",
+                    "richText": null,
+                    "plainText": "Leema Charger"
+                  }
+                ]
+              },
+              {
+                "attribute": {
+                  "name": "Carousel Description",
+                  "slug": "carousel-description"
+                },
+                "values": [
+                  {
+                    "name": "The Quality you will not find anywhere",
+                    "value": "",
+                    "richText": null,
+                    "plainText": "The Quality you will not find anywhere"
+                  }
+                ]
+              },
+              {
+                "attribute": {
+                  "name": "Carousel Image",
+                  "slug": "carousel-image"
+                },
+                "values": [
+                  {
+                    "name": "leema_a%2B_banner_Chargers__ecdf0256.jpg",
+                    "value": "",
+                    "richText": null,
+                    "plainText": null
+                  }
+                ]
+              },
+              {
+                "attribute": {
+                  "name": "Carousel Link",
+                  "slug": "carousel-link"
+                },
+                "values": [
+                  {
+                    "name": "Leema 100W Adapter: LSC-912",
+                    "value": "",
+                    "richText": null,
+                    "plainText": null
+                  },
+                  {
+                    "name": "Leema 25W Adapter: LSC-909",
+                    "value": "",
+                    "richText": null,
+                    "plainText": null
+                  }
+                ]
+              }
+            ],
+            "metadata": []
+          }
+        },
+        {
+          "node": {
+            "title": "CSR Policy",
+            "attributes": [],
+            "metadata": []
+          }
+        },
+        {
+          "node": {
+            "title": "Customer Voucher Page",
+            "attributes": [
+              {
+                "attribute": {
+                  "name": "Voucher Name Description",
+                  "slug": "voucher-name-description"
+                },
+                "values": [
+                  {
+                    "name": "WELCOME500",
+                    "value": "",
+                    "richText": "{\"time\": 1776450851380, \"blocks\": [{\"id\": \"XZP0l_UNGy\", \"data\": {\"text\": \"WELCOME500\", \"caption\": \"This is a discount for every first customer.\", \"alignment\": \"left\"}, \"type\": \"quote\"}], \"version\": \"2.30.7\"}",
+                    "plainText": null
+                  }
+                ]
+              }
+            ],
+            "metadata": [
+              {
+                "key": "channel",
+                "value": "customer-channel"
+              }
+            ]
+          }
+        },
+        {
+          "node": {
+            "title": "E Waste Management",
+            "attributes": [],
+            "metadata": []
+          }
+        },
+        {
+          "node": {
+            "title": "FAQ",
+            "attributes": [],
+            "metadata": []
+          }
+        },
+        {
+          "node": {
+            "title": "Privacy Policy",
+            "attributes": [],
+            "metadata": []
+          }
+        },
+        {
+          "node": {
+            "title": "Terms Conditions",
+            "attributes": [],
+            "metadata": []
+          }
+        }
+      ]
+    }
+  },
+  "extensions": {
+    "cost": {
+      "requestedQueryCost": 40,
+      "maximumAvailable": 50000
+    }
+  }
+}
