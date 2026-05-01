@@ -12,7 +12,8 @@ services:
     container_name: ecommerce_frontend
     restart: unless-stopped
     networks:
-      - e-commerce-network
+      - proxy-network       # Traefik's network — required for SSL and routing
+      - e-commerce-network  # Backend network — required to reach Saleor/Shiprocket
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.frontend.rule=Host(`store.leemasmart.com`)"
@@ -20,6 +21,8 @@ services:
       - "traefik.http.routers.frontend.tls=true"
       - "traefik.http.routers.frontend.tls.certresolver=letsencrypt"
       - "traefik.http.services.frontend.loadbalancer.server.port=80"
+      # Tell Traefik explicitly which network to use to reach this container
+      - "traefik.docker.network=proxy-network"
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:80/health"]
       interval: 30s
@@ -28,6 +31,9 @@ services:
       start_period: 10s
 
 networks:
+  proxy-network:
+    external: true
+    name: proxy-network
   e-commerce-network:
     external: true
     name: leemasmart-backend_leemasmart-network
