@@ -23,4 +23,4 @@ services:
 networks:
   e-commerce-network:
     external: true
-    name: e-commerce-network
+    name: leemasmart-backend_leemasmart-network

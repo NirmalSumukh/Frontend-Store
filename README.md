@@ -146,7 +146,12 @@ Copy `.env.example` to `.env.local` for local development. **Never commit `.env.
 ### Deploy to production (one command)
 
 ```bash
-# On your server, after git pull
+# On your server, after git pull:
+
+# 1. Create your environment file as .env (so Docker Compose finds it automatically)
+cp .env.example .env
+
+# 2. Build and start
 docker compose up -d --build
 ```
 
