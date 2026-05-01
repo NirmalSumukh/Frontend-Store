@@ -22,14 +22,11 @@ interface CartItem {
  * 1. Calls YOUR backend to generate the Shiprocket Token
  */
 const getShiprocketToken = async (items: CartItem[]) => {
-    // ✅ In development, use relative URL to leverage Vite proxy
-    // In production, use the full URL from env var
-    const isDev = import.meta.env.DEV
-    const backendUrl = isDev
-        ? '' // Relative URL will use Vite proxy
-        : (import.meta.env.VITE_SHIPROCKET_APP_URL || 'https://shiprocket.leemasmart.com')
-
-    const endpoint = `${backendUrl}/api/shiprocket/checkout/authorize`
+    // ✅ Always use a relative URL.
+    // In development: Vite proxy (vite.config.ts) forwards /api/shiprocket/ → shiprocket app
+    // In production:  Nginx proxy (nginx.conf) forwards /api/shiprocket/ → shiprocket app
+    // This avoids all CORS issues since the request stays on the same origin.
+    const endpoint = `/api/shiprocket/checkout/authorize`
 
     const requestPayload = {
         cart_data: {
