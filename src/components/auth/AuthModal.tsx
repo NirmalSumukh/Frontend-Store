@@ -134,7 +134,7 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
             await register({
                 email: formData.email,
                 password: formData.pass,
-                redirectUrl: window.location.origin + '/login',
+                redirectUrl: window.location.origin + '/account-confirm',
                 channel: targetChannel,
                 firstName,
                 lastName,
