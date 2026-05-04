@@ -46,6 +46,7 @@ interface AuthState {
   register: (input: RegisterInput) => Promise<{ userId: string }>
   updateUserMetadata: (userId: string, key: string, value: string) => Promise<void>
   addAddress: (userId: string, address: AddressInput, type?: 'BILLING' | 'SHIPPING') => Promise<void>
+  confirmAccount: (email: string, token: string) => Promise<boolean>
   logout: () => void
   setUser: (user: User, token: string, refreshToken?: string) => void
   refreshAccessToken: () => Promise<void>
@@ -399,6 +400,52 @@ export const useAuth = create<AuthState>()(
       logout: () => {
         set({ user: null, token: null, refreshToken: null, isAuthenticated: false })
         // Channel will be reset by useUserChannel hook
+      },
+
+      // ✅ CONFIRM ACCOUNT
+      confirmAccount: async (email: string, token: string) => {
+        try {
+          const response = await fetch(
+            import.meta.env.VITE_SALEOR_API_URL || 'http://localhost:8000/graphql/',
+            {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                query: `
+                  mutation ConfirmAccount($email: String!, $token: String!) {
+                    confirmAccount(email: $email, token: $token) {
+                      user {
+                        id
+                        isActive
+                      }
+                      errors {
+                        field
+                        message
+                        code
+                      }
+                    }
+                  }
+                `,
+                variables: { email, token },
+              }),
+            }
+          )
+
+          const data = await response.json()
+          if (data.errors) {
+            throw new Error(data.errors[0].message)
+          }
+
+          const result = data.data?.confirmAccount
+          if (result?.errors && result.errors.length > 0) {
+            throw new Error(result.errors[0].message)
+          }
+
+          return true
+        } catch (error) {
+          console.error('Account confirmation error:', error)
+          throw error
+        }
       },
 
       setUser: (user: User, token: string, refreshToken?: string) => {

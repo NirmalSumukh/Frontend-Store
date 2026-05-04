@@ -12,6 +12,7 @@ import CatalogPage from '@/pages/catalog'
 import ProductPage from '@/pages/product'
 import CartPage from '@/pages/cart'
 import AccountPage from '@/pages/account'
+import AccountConfirmPage from '@/pages/account-confirm'
 import GeometricBackground from '@/components/layout/GeometricBackground'
 import DealsPage from '@/pages/deals'
 
@@ -58,6 +59,7 @@ function App() {
             <Route path="/cart" element={<CartPage />} />
             <Route path="/deals" element={<DealsPage />} />
             <Route path="/account/*" element={<AccountPage />} />
+            <Route path="/account-confirm" element={<AccountConfirmPage />} />
 
             {/* ✅ Static CMS Routes */}
             <Route path="/faq" element={<FAQPage />} />
