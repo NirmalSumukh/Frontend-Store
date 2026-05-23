@@ -14,15 +14,15 @@
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
 
-  <!-- The Shiprocket Shopify script below is throwing the Host Validation console errors. 
-       Since you use Saleor, not Shopify, this script will fail. Commenting it out to fix the console errors. -->
-  <!-- <script src="https://checkout-ui.shiprocket.com/assets/js/channels/shopify.js"></script> -->
+  <!-- The Shiprocket SDK script. It is named shopify.js but it is required for ALL custom websites -->
+  <script src="https://checkout-ui.shiprocket.com/assets/js/channels/shopify.js"></script>
 </head>
 
 <body>
   <div id="root"></div>
 
-  <input type="hidden" value="your-domain.com" id="sellerDomain" />
+  <!-- This domain MUST match your actual URL for Host Validation to pass! -->
+  <input type="hidden" value="store.leemasmart.com" id="sellerDomain" />
 
   <script type="module" src="/src/main.tsx"></script>
 </body>
