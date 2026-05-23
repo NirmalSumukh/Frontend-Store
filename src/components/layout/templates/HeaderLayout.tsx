@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
   ShoppingCart,
-  Heart,
   User,
   Search,
   Menu,
@@ -60,7 +59,6 @@ interface HeaderLayoutProps {
   onLogout: () => void
   onHoverNav: (name: string) => void
   onLeaveNav: () => void
-  onNavigate: (path: string) => void
 
   // ✅ NEW: Handler to open the Auth Modal
   onOpenLogin: () => void
@@ -95,7 +93,6 @@ export default function HeaderLayout({
   onLogout,
   onHoverNav,
   onLeaveNav,
-  onNavigate,
 
   // ✅ Destructure new prop
   onOpenLogin,
@@ -115,6 +112,14 @@ export default function HeaderLayout({
           'transition-all duration-300 bg-white border-b border-gray-200 shadow-sm'
         )}
       >
+        {announcementText && (
+          <div className="w-full bg-white border-b border-gray-100 py-1.5 sm:py-2 text-center shadow-[0_2px_10px_rgba(0,0,0,0.02)]">
+            <p className="text-[#FF6B35] font-bold text-xs sm:text-sm uppercase tracking-wider">
+              {announcementText}
+            </p>
+          </div>
+        )}
+
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16 md:h-20">
 
@@ -196,14 +201,7 @@ export default function HeaderLayout({
                 <Search className="w-5 h-5 stroke-[1.5]" />
               </motion.button>
 
-              <motion.button
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
-                onClick={() => onNavigate('/account/wishlist')}
-                className="hidden sm:block p-2 text-[#222222] hover:text-[#FF6B35] transition-all duration-200"
-              >
-                <Heart className="w-5 h-5 stroke-[1.5]" />
-              </motion.button>
+
 
               <motion.button
                 whileHover={{ scale: 1.1 }}
@@ -312,14 +310,6 @@ export default function HeaderLayout({
             </div>
           </div>
         </div>
-
-        {announcementText && (
-          <div className="w-full bg-white border-t border-gray-100 py-1.5 sm:py-2 text-center shadow-[0_2px_10px_rgba(0,0,0,0.02)]">
-            <p className="text-[#FF6B35] font-bold text-xs sm:text-sm uppercase tracking-wider">
-              {announcementText}
-            </p>
-          </div>
-        )}
 
         <AnimatePresence>
           {isMenuOpen && (

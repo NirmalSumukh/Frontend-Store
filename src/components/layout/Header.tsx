@@ -68,11 +68,7 @@ const Header = () => {
     navigate('/')
   }
 
-  const handleNavigate = (path: string) => {
-    setIsUserMenuOpen(false)
-    setIsMenuOpen(false)
-    navigate(path)
-  }
+
 
   const handleHoverNav = (name: string) => {
     const item = navItems.find(i => i.name === name)
@@ -123,7 +119,6 @@ const Header = () => {
         onLogout={handleLogout}
         onHoverNav={handleHoverNav}
         onLeaveNav={() => setActiveDropdown(null)}
-        onNavigate={handleNavigate}
         searchQuery={searchQuery}
         onSearchChange={setSearchQuery}
         searchResults={searchResults}
