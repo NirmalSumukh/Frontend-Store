@@ -61,6 +61,11 @@ export const initiateShiprocketCheckout = async (
     event: any,
     cartItems: any[]
 ) => {
+    // ✅ Prevent the button from triggering any navigation or form submission
+    // This MUST be called synchronously (before any await) or it won't work.
+    if (event && event.preventDefault) event.preventDefault()
+    if (event && event.stopPropagation) event.stopPropagation()
+
     console.log('[Shiprocket] Checkout initiated. Cart items:', cartItems.length)
     console.log('[Shiprocket] window.HeadlessCheckout available:', !!window.HeadlessCheckout)
     console.log('[Shiprocket] window.HeadlessCheckout value:', window.HeadlessCheckout)
