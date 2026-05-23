@@ -54,22 +54,31 @@ const getShiprocketToken = async (items: CartItem[]) => {
     return data.token
 }
 
+// Helper to generate UUIDs
+const generateUUID = () => 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
+    const r = Math.random() * 16 | 0
+    const v = c === 'x' ? r : (r & 0x3 | 0x8)
+    return v.toString(16)
+})
+
 /**
  * Build the Shiprocket checkout URL directly.
  * 
  * From the SDK source code (shopify.js), the checkout UI URL is:
- *   https://fastrr-boost-ui.pickrr.com/?{params}
- * 
- * For "custom" platform integrations, the key params are:
- *   - customCheckoutToken: the token from the API
- *   - type: "cart"
- *   - platform: "CUSTOM"
- *   - channel: base64-encoded JSON with shop_url and redirectUrl
+ *   https://fastrr-boost-ui.pickrr.com/?{params}#cart={base64Cart}
  */
 const buildCheckoutUrl = (token: string): string => {
     const baseUrl = 'https://fastrr-boost-ui.pickrr.com/'
-
     const sellerDomain = document.getElementById('sellerDomain')?.getAttribute('value') || window.location.host
+
+    const fastrrUuid = localStorage.getItem('fastrr_uuid') || generateUUID()
+    const fastrrUsid = localStorage.getItem('fastrr_usid') || `${fastrrUuid}-${Date.now()}`
+    
+    // Save these just in case Shiprocket requires them across sessions
+    localStorage.setItem('fastrr_uuid', fastrrUuid)
+    localStorage.setItem('fastrr_usid', fastrrUsid)
+
+    const shortUuid = generateUUID().slice(0, 8)
 
     // Channel data expected by the checkout UI
     const channelData = {
@@ -81,24 +90,25 @@ const buildCheckoutUrl = (token: string): string => {
     }
 
     const channelEncoded = window.btoa(encodeURIComponent(JSON.stringify(channelData)))
+    const emptyCartEncoded = window.btoa(encodeURIComponent(JSON.stringify([])))
 
     const params = new URLSearchParams({
         customCheckoutToken: token,
         type: 'cart',
         platform: 'CUSTOM',
         channel: channelEncoded,
-        cart: window.btoa(encodeURIComponent(JSON.stringify([]))),
+        uuid: shortUuid,
+        userDeviceId: fastrrUuid,
+        userSessionId: fastrrUsid,
     })
 
-    return `${baseUrl}?${params.toString()}`
+    // The SDK specifically adds the 'cart' param as a hash fragment!
+    // "cart"===t?(o="#".concat(t,"=").concat(i),null)
+    return `${baseUrl}?${params.toString()}#cart=${emptyCartEncoded}`
 }
 
 /**
  * 2. Triggers the Shiprocket Checkout
- * 
- * We bypass the SDK's addToCart() because it opens an iframe that immediately
- * falls back to a redirect URL on custom (non-Shopify) sites. Instead, we
- * open the Shiprocket checkout UI directly in the current window.
  */
 export const initiateShiprocketCheckout = async (
     event: any,
