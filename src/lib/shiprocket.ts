@@ -55,45 +55,76 @@ const getShiprocketToken = async (items: CartItem[]) => {
 }
 
 /**
- * 2. Triggers the Shiprocket Popup
+ * Build the Shiprocket checkout URL directly.
+ * 
+ * From the SDK source code (shopify.js), the checkout UI URL is:
+ *   https://fastrr-boost-ui.pickrr.com/?{params}
+ * 
+ * For "custom" platform integrations, the key params are:
+ *   - customCheckoutToken: the token from the API
+ *   - type: "cart"
+ *   - platform: "CUSTOM"
+ *   - channel: base64-encoded JSON with shop_url and redirectUrl
+ */
+const buildCheckoutUrl = (token: string): string => {
+    const baseUrl = 'https://fastrr-boost-ui.pickrr.com/'
+
+    const sellerDomain = document.getElementById('sellerDomain')?.getAttribute('value') || window.location.host
+
+    // Channel data expected by the checkout UI
+    const channelData = {
+        shop_name: 'company-logo',
+        shop_url: sellerDomain,
+        redirectUrl: window.location.origin + '/account/orders',
+        credInstalled: false,
+        gpayInstalled: 'YES'
+    }
+
+    const channelEncoded = window.btoa(encodeURIComponent(JSON.stringify(channelData)))
+
+    const params = new URLSearchParams({
+        customCheckoutToken: token,
+        type: 'cart',
+        platform: 'CUSTOM',
+        channel: channelEncoded,
+        cart: window.btoa(encodeURIComponent(JSON.stringify([]))),
+    })
+
+    return `${baseUrl}?${params.toString()}`
+}
+
+/**
+ * 2. Triggers the Shiprocket Checkout
+ * 
+ * We bypass the SDK's addToCart() because it opens an iframe that immediately
+ * falls back to a redirect URL on custom (non-Shopify) sites. Instead, we
+ * open the Shiprocket checkout UI directly in the current window.
  */
 export const initiateShiprocketCheckout = async (
     event: any,
     cartItems: any[]
 ) => {
-    // ✅ Prevent the button from triggering any navigation or form submission
-    // This MUST be called synchronously (before any await) or it won't work.
-    if (event && event.preventDefault) event.preventDefault()
-    if (event && event.stopPropagation) event.stopPropagation()
+    // Prevent any default navigation synchronously
+    if (event?.preventDefault) event.preventDefault()
+    if (event?.stopPropagation) event.stopPropagation()
 
     console.log('[Shiprocket] Checkout initiated. Cart items:', cartItems.length)
-    console.log('[Shiprocket] window.HeadlessCheckout available:', !!window.HeadlessCheckout)
-    console.log('[Shiprocket] window.HeadlessCheckout value:', window.HeadlessCheckout)
 
     const toastId = toast.loading('Securing checkout...')
 
     try {
-        // Step A: Verify SDK is loaded
-        if (!window.HeadlessCheckout) {
-            console.error('[Shiprocket] SDK NOT loaded. window.HeadlessCheckout is undefined.')
-            console.error('[Shiprocket] Available window keys (shiprocket-related):', 
-                Object.keys(window).filter(k => k.toLowerCase().includes('checkout') || k.toLowerCase().includes('shiprocket') || k.toLowerCase().includes('headless'))
-            )
-            throw new Error('Shiprocket checkout script is not loaded. Please refresh the page and try again.')
-        }
-
-        // Step B: Get the token from your backend
-        console.log('[Shiprocket] Step 2: Getting token...')
+        // Step 1: Get the token from our backend
         const token = await getShiprocketToken(cartItems)
-        console.log('[Shiprocket] Step 3: Token received. Calling addToCart...')
+        console.log('[Shiprocket] Token received:', token)
 
-        // Step C: Launch Shiprocket Headless Checkout
-        window.HeadlessCheckout.addToCart(event, token, {
-            fallbackUrl: window.location.origin + '/cart',
-        })
+        // Step 2: Build the checkout URL and navigate directly
+        const checkoutUrl = buildCheckoutUrl(token)
+        console.log('[Shiprocket] Opening checkout URL:', checkoutUrl)
 
-        console.log('[Shiprocket] Step 4: addToCart called successfully.')
         toast.dismiss(toastId)
+
+        // Navigate to Shiprocket's hosted checkout page directly
+        window.location.href = checkoutUrl
 
     } catch (error: any) {
         toast.dismiss(toastId)
