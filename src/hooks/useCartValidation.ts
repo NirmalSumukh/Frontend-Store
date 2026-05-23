@@ -22,7 +22,7 @@ export const GET_VARIANTS_STOCK = gql`
 export const useCartValidation = () => {
   const { items, removeItem, isOpen } = useCart()
   const { currentChannel } = useChannel()
-  const [fetchStock] = useLazyQuery(GET_VARIANTS_STOCK)
+  const [fetchStock] = useLazyQuery(GET_VARIANTS_STOCK, { fetchPolicy: 'network-only' })
   const location = useLocation()
 
   useEffect(() => {
@@ -33,8 +33,7 @@ export const useCartValidation = () => {
       
       try {
         const { data } = await fetchStock({
-          variables: { ids: variantIds, channel: currentChannel },
-          fetchPolicy: 'network-only' // Always get fresh data on check
+          variables: { ids: variantIds, channel: currentChannel }
         })
 
         if (data?.productVariants?.edges) {
