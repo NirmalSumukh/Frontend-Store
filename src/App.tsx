@@ -2,6 +2,7 @@
 import { Routes, Route, Navigate } from 'react-router-dom'
 import { useEffect } from 'react'
 import Header from '@/components/layout/Header'
+import ScrollToTop from '@/components/layout/ScrollToTop'
 import HomePage from '@/pages/index'
 import ErrorBoundary from '@/components/error/ErrorBoundary'
 import { useUserChannel } from '@/hooks/useUserChannel'
@@ -46,6 +47,7 @@ function App() {
   return (
     <ErrorBoundary>
       <div className="w-full min-h-screen bg-background text-foreground">
+        <ScrollToTop />
         <GeometricBackground />
         <Header />
         <main className="flex-1 w-full">

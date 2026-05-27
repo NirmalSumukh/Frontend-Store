@@ -51,7 +51,20 @@ export default function CarouselLayout({
     <style>
       {`
         .carousel-layout-container {
-          height: 450px; /* Reduced Mobile Height to remove empty space */
+          height: auto;
+          aspect-ratio: 16 / 10;
+          min-height: 220px;
+          margin: 12px; /* Separation from navbar and edges */
+          border-radius: 16px;
+          overflow: hidden;
+        }
+        .carousel-image-wrapper {
+          position: relative;
+          width: 100%;
+          height: 100%;
+          padding: 8px;
+          box-sizing: border-box;
+          z-index: 1;
         }
         .carousel-heading {
           font-size: 1.8rem; /* Smaller heading for mobile */
@@ -74,6 +87,12 @@ export default function CarouselLayout({
         @media (min-width: 768px) {
           .carousel-layout-container {
             height: 850px; /* Increased Desktop Height */
+            aspect-ratio: auto;
+            margin: 24px;
+            border-radius: 24px;
+          }
+          .carousel-image-wrapper {
+            padding: 24px;
           }
           .carousel-heading {
             font-size: 4.5rem;
@@ -155,17 +174,17 @@ export default function CarouselLayout({
 
   const containerStyle: React.CSSProperties = {
     position: 'relative',
-    width: '100%',
+    width: 'auto', // Changed to auto to respect margins
     overflow: 'hidden',
     backgroundColor: '#1a1a1a',
-    borderRadius: '0px',
-    margin: 0,
-    padding: 0,
+    // margin and borderRadius moved to CSS class for responsiveness
   }
 
   const loadingStyle: React.CSSProperties = {
     ...containerStyle,
-    height: '450px', // Matched new mobile height
+    aspectRatio: '16 / 10',
+    minHeight: '220px',
+    height: 'auto', // Matched new mobile height
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
@@ -189,6 +208,8 @@ export default function CarouselLayout({
     objectPosition: 'center', // Keeps focus in center
     display: 'block', // Fixes bottom whitespace gap
     zIndex: 1,
+    borderRadius: '12px', // Add rounded corners to the image itself
+    boxShadow: '0 8px 32px rgba(0, 0, 0, 0.2)', // Adds depth to the bubble
   }
 
 
@@ -220,10 +241,10 @@ export default function CarouselLayout({
   }
 
   const dotStyle = (isActive: boolean): React.CSSProperties => ({
-    width: isActive ? '32px' : '10px',
-    height: '10px',
-    borderRadius: '5px',
-    backgroundColor: isActive ? '#FF6B35' : 'rgba(255, 255, 255, 0.3)',
+    width: isActive ? '24px' : '8px',
+    height: '8px',
+    borderRadius: '4px',
+    backgroundColor: isActive ? 'rgba(255, 255, 255, 0.4)' : 'rgba(255, 255, 255, 0.3)',
     border: 'none',
     cursor: 'pointer',
     transition: 'all 0.3s ease',
@@ -262,26 +283,46 @@ export default function CarouselLayout({
               transition={{ duration: 0.7 }}
               style={slideContainerStyle}
             >
-              {/* Main Image - Stretched to Cover */}
-              <picture style={{ display: 'block', width: '100%', height: '100%' }}>
-                {slide.mobileImage && <source media="(max-width: 767px)" srcSet={slide.mobileImage} />}
-                <img
-                  src={slide.image}
-                  alt={slide.heading || `Slide ${index + 1}`}
-                  loading={index === 0 ? 'eager' : 'lazy'}
-                  onLoad={() => handleImageLoad(index)}
-                  onClick={() => handleCTAClick(slide.link)}
-                  style={{
-                    ...mainImageStyle,
-                    opacity: imageLoaded[index] ? 1 : 0,
-                    transition: 'opacity 0.5s ease-in-out',
-                    cursor: 'pointer'
-                  }}
-                  onError={(e) => {
-                    e.currentTarget.src = 'https://images.unsplash.com/photo-1630183477086-effc914f2aea?w=1200&h=400&fit=crop'
-                  }}
-                />
-              </picture>
+              {/* Blurred Background Layer for Dynamic Color Effect */}
+              <div 
+                style={{
+                  position: 'absolute',
+                  top: '-5%',
+                  left: '-5%',
+                  width: '110%',
+                  height: '110%',
+                  backgroundImage: `url(${slide.mobileImage || slide.image})`,
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center',
+                  filter: 'blur(40px)',
+                  opacity: 0.7,
+                  zIndex: 0,
+                  transform: 'scale(1.1)',
+                }}
+              />
+
+              <div className="carousel-image-wrapper">
+                {/* Main Image - Stretched to Cover inside Wrapper */}
+                <picture style={{ display: 'block', width: '100%', height: '100%' }}>
+                  {slide.mobileImage && <source media="(max-width: 767px)" srcSet={slide.mobileImage} />}
+                  <img
+                    src={slide.image}
+                    alt={slide.heading || `Slide ${index + 1}`}
+                    loading={index === 0 ? 'eager' : 'lazy'}
+                    onLoad={() => handleImageLoad(index)}
+                    onClick={() => handleCTAClick(slide.link)}
+                    style={{
+                      ...mainImageStyle,
+                      opacity: imageLoaded[index] ? 1 : 0,
+                      transition: 'opacity 0.5s ease-in-out',
+                      cursor: 'pointer'
+                    }}
+                    onError={(e) => {
+                      e.currentTarget.src = 'https://images.unsplash.com/photo-1630183477086-effc914f2aea?w=1200&h=400&fit=crop'
+                    }}
+                  />
+                </picture>
+              </div>
             </motion.div>
           )
         ))}
@@ -328,9 +369,43 @@ export default function CarouselLayout({
           <button
             key={index}
             onClick={() => goToSlide(index)}
-            style={dotStyle(currentSlide === index)}
+            style={{
+              ...dotStyle(currentSlide === index),
+              position: 'relative',
+              overflow: 'hidden',
+              padding: 0,
+            }}
             aria-label={`Go to slide ${index + 1}`}
-          />
+          >
+            {currentSlide === index && autoPlay && !isPaused && (
+              <motion.div
+                key={`progress-${index}`}
+                initial={{ width: '0%' }}
+                animate={{ width: '100%' }}
+                transition={{ duration: autoPlayInterval / 1000, ease: 'linear' }}
+                style={{
+                  position: 'absolute',
+                  top: 0,
+                  left: 0,
+                  height: '100%',
+                  backgroundColor: '#FF6B35', // Fill color for active dot
+                }}
+              />
+            )}
+            {/* When not autoplaying or paused, just keep it filled */}
+            {currentSlide === index && (!autoPlay || isPaused) && (
+              <div
+                style={{
+                  position: 'absolute',
+                  top: 0,
+                  left: 0,
+                  width: '100%',
+                  height: '100%',
+                  backgroundColor: '#FF6B35',
+                }}
+              />
+            )}
+          </button>
         ))}
       </div>
 
