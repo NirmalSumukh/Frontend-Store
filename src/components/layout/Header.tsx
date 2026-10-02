@@ -87,7 +87,7 @@ const Header = () => {
     { name: 'Shop', href: '/catalog', hasDropdown: false },
     { name: 'Categories', href: '#', hasDropdown: true },
     { name: 'Deals', href: '/deals', hasDropdown: false },
-    { name: 'About', href: '/about', hasDropdown: false },
+    { name: 'About', href: '/about-us', hasDropdown: false },
   ]
 
   const categories = useMemo(() => {
