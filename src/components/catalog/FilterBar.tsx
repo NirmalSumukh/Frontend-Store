@@ -60,7 +60,7 @@ export default function FilterBar({
         whileTap={{ scale: 0.95 }}
         className={`p-2.5 rounded-lg transition-colors focus:outline-none 
           ${showFilters
-            ? 'bg-orange-50 text-orange-600'
+            ? 'bg-primary/10 text-primary'
             : 'bg-gray-100 text-gray-500 hover:bg-gray-200'}`}
         aria-label={showFilters ? 'Hide filters' : 'Show filters'}
       >

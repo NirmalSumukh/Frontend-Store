@@ -35,14 +35,14 @@ const EmptyCart = () => {
         <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center text-sm">
           <Link
             to="/account/orders"
-            className="text-primary-600 hover:text-primary-700 font-medium transition-colors"
+            className="text-primary hover:text-primary/80 font-medium transition-colors"
           >
             View Order History
           </Link>
           <span className="hidden sm:block text-gray-400">•</span>
           <Link
             to="/account/wishlist"
-            className="text-primary-600 hover:text-primary-700 font-medium transition-colors"
+            className="text-primary hover:text-primary/80 font-medium transition-colors"
           >
             Check Wishlist
           </Link>

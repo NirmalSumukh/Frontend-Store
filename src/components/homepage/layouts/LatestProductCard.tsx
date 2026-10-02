@@ -62,13 +62,13 @@ export default function LatestProductCard({ product }: LatestProductCardProps) {
 
         {/* CARD CONTAINER */}
         {/* Added h-full and flex col to ensure uniform height alignment in Swiper */}
-        <div className="h-full flex flex-col bg-[#14161B] border border-white/10 rounded-3xl p-6 transition-all duration-500 group-hover:border-[#FF6B00]/50 group-hover:bg-[#1A1C23]">
+        <div className="h-full flex flex-col bg-[#1E1B18] border border-white/10 rounded-3xl p-6 transition-all duration-500 group-hover:border-primary/50 group-hover:bg-[#252118]">
 
           {/* IMAGE AREA - Floating Effect */}
           {/* Added flex-grow to push content down evenly */}
           <div className="relative h-52 w-full mb-6 flex items-center justify-center flex-grow">
             {/* Glow behind image on hover */}
-            <div className="absolute w-2/3 h-2/3 bg-[#FF6B00]/0 rounded-full blur-2xl group-hover:bg-[#FF6B00]/10 transition-all duration-500" />
+            <div className="absolute w-2/3 h-2/3 bg-primary/0 rounded-full blur-2xl group-hover:bg-primary/10 transition-all duration-500" />
 
             <ImageWithFallback
               src={imageUrl}
@@ -107,14 +107,14 @@ export default function LatestProductCard({ product }: LatestProductCardProps) {
                 )}
 
                 {/* CURRENT PRICE */}
-                <span className="text-2xl font-bold text-[#FF6B00]">
+                <span className="text-2xl font-bold text-primary">
                   {formatPrice(price, currency)}
                 </span>
               </div>
 
               {/* ACTION ARROW */}
               <div className="flex gap-2">
-                <div className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-[#FF6B00] group-hover:bg-[#FF6B00] group-hover:text-white transition-all duration-300">
+                <div className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-300">
                   <ArrowRight className="w-5 h-5" />
                 </div>
               </div>
@@ -128,7 +128,7 @@ export default function LatestProductCard({ product }: LatestProductCardProps) {
         <Button
           onClick={handleAddToCart}
           size="icon"
-          className="rounded-full bg-[#FF6B00] hover:bg-[#E56000] text-white shadow-lg shadow-orange-500/20"
+          className="rounded-full bg-primary hover:bg-primary/90 text-primary-foreground shadow-lg shadow-primary/20"
         >
           <ShoppingCart className="w-4 h-4" />
         </Button>

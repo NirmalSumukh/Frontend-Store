@@ -30,7 +30,7 @@ const Navigation = ({ mobile = false, onClose }: NavigationProps) => {
             key={link.name}
             to={link.href}
             onClick={onClose}
-            className="text-gray-700 hover:text-primary-600 font-medium transition-colors"
+            className="text-gray-700 hover:text-primary font-medium transition-colors"
           >
             {link.name}
           </Link>
@@ -45,7 +45,7 @@ const Navigation = ({ mobile = false, onClose }: NavigationProps) => {
                 key={category.id}
                 to={`/catalog/${category.slug}`}
                 onClick={onClose}
-                className="text-gray-700 hover:text-primary-600 transition-colors pl-4"
+                className="text-gray-700 hover:text-primary transition-colors pl-4"
               >
                 {category.name}
               </Link>
@@ -62,7 +62,7 @@ const Navigation = ({ mobile = false, onClose }: NavigationProps) => {
         <Link
           key={link.name}
           to={link.href}
-          className="text-gray-700 hover:text-primary-600 font-medium transition-colors"
+          className="text-gray-700 hover:text-primary font-medium transition-colors"
         >
           {link.name}
         </Link>
@@ -71,7 +71,7 @@ const Navigation = ({ mobile = false, onClose }: NavigationProps) => {
       {/* Categories Dropdown */}
       {!loading && categories.length > 0 && (
         <Menu as="div" className="relative">
-          <Menu.Button className="flex items-center space-x-1 text-gray-700 hover:text-primary-600 font-medium transition-colors">
+          <Menu.Button className="flex items-center space-x-1 text-gray-700 hover:text-primary font-medium transition-colors">
             <span>Categories</span>
             <ChevronDownIcon className="h-4 w-4" />
           </Menu.Button>
@@ -93,7 +93,7 @@ const Navigation = ({ mobile = false, onClose }: NavigationProps) => {
                       <Link
                         to={`/catalog/${category.slug}`}
                         className={`${
-                          active ? 'bg-gray-100 text-primary-600' : 'text-gray-700'
+                          active ? 'bg-primary/10 text-primary' : 'text-gray-700'
                         } block px-4 py-2 text-sm transition-colors`}
                       >
                         {category.name}
@@ -108,7 +108,7 @@ const Navigation = ({ mobile = false, onClose }: NavigationProps) => {
                     <Link
                       to="/catalog"
                       className={`${
-                        active ? 'bg-gray-100 text-primary-600' : 'text-gray-700'
+                        active ? 'bg-primary/10 text-primary' : 'text-gray-700'
                       } block px-4 py-2 text-sm font-medium transition-colors`}
                     >
                       View All Categories

@@ -62,7 +62,7 @@ export function FilterDropdown({
               role="listbox"
             >
               {/* Tiny Leema Orange Accent Line on Dropdown */}
-              <div className="absolute top-0 left-4 right-4 h-0.5 bg-orange-500/20 rounded-full"></div>
+              <div className="absolute top-0 left-4 right-4 h-0.5 bg-primary/20 rounded-full"></div>
 
               <button
                 type="button"
@@ -72,7 +72,7 @@ export function FilterDropdown({
                 }}
                 className={`
                   w-full text-left px-4 py-2.5 text-sm transition-colors mt-1
-                  ${!activeOptionName ? 'text-orange-600 font-bold bg-orange-50' : 'text-gray-600 hover:bg-gray-50'}
+                  ${!activeOptionName ? 'text-primary font-bold bg-primary/10' : 'text-gray-600 hover:bg-gray-50'}
                 `}
                 role="option"
                 aria-selected={!activeOptionName}
@@ -94,7 +94,7 @@ export function FilterDropdown({
                     className={`
                       w-full text-left px-4 py-2.5 text-sm transition-colors border-l-2
                       ${isSelected
-                        ? 'border-orange-500 bg-gray-50 text-gray-900 font-semibold'
+                        ? 'border-primary bg-gray-50 text-gray-900 font-semibold'
                         : 'border-transparent text-gray-600 hover:bg-gray-50 hover:text-gray-900'
                       }
                     `}

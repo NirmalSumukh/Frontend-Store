@@ -88,8 +88,8 @@ const CategoryFilter = ({
                               }}
                               className={`w-full text-left px-4 py-2 rounded-lg transition-colors ${
                                 !selectedCategory
-                                  ? 'bg-primary-50 text-primary-700 font-medium'
-                                  : 'hover:bg-accent' // MODIFICATION: use 'accent'
+                                  ? 'bg-primary/10 text-primary font-medium'
+                                  : 'hover:bg-accent'
                               }`}
                             >
                               All Categories
@@ -103,8 +103,8 @@ const CategoryFilter = ({
                                 }}
                                 className={`w-full text-left px-4 py-2 rounded-lg transition-colors ${
                                   selectedCategory === category.slug
-                                    ? 'bg-primary-50 text-primary-700 font-medium'
-                                    : 'hover:bg-accent' // MODIFICATION: use 'accent'
+                                    ? 'bg-primary/10 text-primary font-medium'
+                                    : 'hover:bg-accent'
                                 }`}
                               >
                                 {category.name}

@@ -156,7 +156,7 @@ export default function CatalogCard({ product, onAddToCart }: CatalogCardProps) 
               </span>
             )}
             {isLowStock && !isOutOfStock && (
-              <span className="bg-orange-100 text-orange-700 px-3 py-1 text-xs font-bold rounded">
+              <span className="bg-primary/10 text-primary px-3 py-1 text-xs font-bold rounded">
                 Low Stock
               </span>
             )}
@@ -171,7 +171,7 @@ export default function CatalogCard({ product, onAddToCart }: CatalogCardProps) 
             to={productDetailUrl}
             className={isOutOfStock ? 'pointer-events-none' : ''}
           >
-            <h3 className="text-lg font-bold text-gray-900 leading-tight mb-1 group-hover:text-orange-600 transition-colors line-clamp-2">
+            <h3 className="text-lg font-bold text-gray-900 leading-tight mb-1 group-hover:text-primary transition-colors line-clamp-2">
               {name}
             </h3>
           </Link>
@@ -230,7 +230,7 @@ export default function CatalogCard({ product, onAddToCart }: CatalogCardProps) 
                 flex items-center justify-center w-10 h-10 rounded-full transition-all duration-300 shadow-md
                 ${isOutOfStock
                   ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
-                  : 'bg-orange-500 text-white hover:bg-orange-600 hover:shadow-orange-500/30 hover:scale-105 active:scale-95'
+                  : 'bg-primary text-primary-foreground hover:bg-primary/90 hover:shadow-primary/30 hover:scale-105 active:scale-95'
                 }
               `}
               title="Add to Cart"

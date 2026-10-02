@@ -23,10 +23,10 @@ export default function LatestProductsLayout({ products }: LatestProductsLayoutP
 
   return (
     // FIX 1: Added overflow-hidden here to stop the page from scrolling horizontally
-    <section className="relative w-full bg-[#0F1115] py-20 overflow-hidden group/section">
+    <section className="relative w-full bg-[#1E1B18] py-20 overflow-hidden group/section">
 
       {/* Ambient glow background */}
-      <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-orange-500/5 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[120px] pointer-events-none" />
 
       {/* Main Container */}
       <div className="container relative z-10 mx-auto px-4 md:px-12">
@@ -35,7 +35,7 @@ export default function LatestProductsLayout({ products }: LatestProductsLayoutP
         <div className="flex items-center justify-between mb-10 pl-2">
           <div className="flex items-center gap-4">
             {/* Small header accent strip */}
-            <div className="hidden md:block w-1.5 h-10 bg-[#FF6B00] rounded-full"></div>
+            <div className="hidden md:block w-1.5 h-10 bg-primary rounded-full"></div>
             <div>
               <h2 className="text-3xl md:text-5xl font-bold text-white tracking-tight">
                 Latest Products
@@ -50,14 +50,14 @@ export default function LatestProductsLayout({ products }: LatestProductsLayoutP
           <div className="hidden md:flex gap-3 relative z-30">
             <button
               onClick={() => swiperInstance?.slidePrev()}
-              className="p-3 rounded-full border border-white/10 bg-[#14161B] text-white hover:bg-[#FF6B00] hover:border-[#FF6B00] transition-all duration-300 group"
+              className="p-3 rounded-full border border-white/10 bg-[#1E1B18] text-white hover:bg-primary hover:border-primary transition-all duration-300 group"
               aria-label="Previous slide"
             >
               <ChevronLeft className="w-5 h-5" />
             </button>
             <button
               onClick={() => swiperInstance?.slideNext()}
-              className="p-3 rounded-full border border-white/10 bg-[#14161B] text-white hover:bg-[#FF6B00] hover:border-[#FF6B00] transition-all duration-300 group"
+              className="p-3 rounded-full border border-white/10 bg-[#1E1B18] text-white hover:bg-primary hover:border-primary transition-all duration-300 group"
               aria-label="Next slide"
             >
               <ChevronRight className="w-5 h-5" />
@@ -70,7 +70,7 @@ export default function LatestProductsLayout({ products }: LatestProductsLayoutP
 
           {/* FIX 2: THE SIDEBAR IS NOW HERE (Inside the flex container) */}
           {/* It will now sit exactly to the left of the products, not the screen edge */}
-          <div className="hidden md:block w-3 h-[380px] shrink-0 bg-[#FF6B00] rounded-full shadow-[0_0_25px_rgba(255,107,0,0.4)]"></div>
+          <div className="hidden md:block w-3 h-[380px] shrink-0 bg-primary rounded-full shadow-[0_0_25px_rgba(184,68,28,0.4)]"></div>
 
           {/* FIX 3: SWIPER WRAPPER */}
           {/* 'min-w-0' is CRITICAL. It stops flex children from overflowing the parent */}

@@ -4,43 +4,38 @@
 :root {
   --font-size: 16px;
 
-  /* ✅ CHANGED: Applied your beige theme color globally */
   --background: #F3F0E7;
+  --foreground: #1C1B18;
+  --card: #FAF8F2;
+  --card-foreground: #1C1B18;
 
-  /* This is already black, as you requested */
-  --foreground: oklch(0.145 0 0);
+  --popover: #FAF8F2;
+  --popover-foreground: #1C1B18;
 
-  /* Kept card white to contrast nicely with the beige background */
-  --card: #ffffff;
-  --card-foreground: oklch(0.145 0 0);
+  --primary: #B8441C;
+  --primary-foreground: #FFFFFF;
 
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
+  --secondary: #EAE6DA;
+  --secondary-foreground: #1C1B18;
 
-  --primary: #030213;
-  --primary-foreground: oklch(1 0 0);
+  --muted: #EAE6DA;
+  --muted-foreground: #6B6558;
 
-  --secondary: oklch(0.95 0.0058 264.53);
-  --secondary-foreground: #030213;
-
-  --muted: #ececf0;
-  --muted-foreground: #717182;
-
-  --accent: #e9ebef;
-  --accent-foreground: #030213;
+  --accent: #EAE6DA;
+  --accent-foreground: #1C1B18;
 
   --destructive: #d4183d;
   --destructive-foreground: #ffffff;
 
-  --border: rgba(0, 0, 0, 0.1);
+  --border: rgba(28, 27, 24, 0.12);
   --input: transparent;
-  --input-background: #f3f3f5;
-  --switch-background: #cbced4;
+  --input-background: #EAE6DA;
+  --switch-background: #C5BFB0;
 
   --font-weight-medium: 500;
   --font-weight-normal: 400;
 
-  --ring: oklch(0.708 0 0);
+  --ring: #B8441C;
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
   --chart-3: oklch(0.398 0.07 227.392);
@@ -49,36 +44,36 @@
 
   --radius: 0.625rem;
 
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: #030213;
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
+  --sidebar: #FAF8F2;
+  --sidebar-foreground: #1C1B18;
+  --sidebar-primary: #B8441C;
+  --sidebar-primary-foreground: #FFFFFF;
+  --sidebar-accent: #EAE6DA;
+  --sidebar-accent-foreground: #1C1B18;
+  --sidebar-border: rgba(28, 27, 24, 0.12);
+  --sidebar-ring: #B8441C;
 }
 
 .dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.145 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.145 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.985 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
+  --background: #17140F;
+  --foreground: #F3F0E7;
+  --card: #211C16;
+  --card-foreground: #F3F0E7;
+  --popover: #211C16;
+  --popover-foreground: #F3F0E7;
+  --primary: #E2703B;
+  --primary-foreground: #17140F;
+  --secondary: #2A241C;
+  --secondary-foreground: #F3F0E7;
+  --muted: #2A241C;
+  --muted-foreground: #B0A794;
+  --accent: #2A241C;
+  --accent-foreground: #F3F0E7;
   --destructive: oklch(0.396 0.141 25.723);
   --destructive-foreground: oklch(0.637 0.237 25.331);
-  --border: oklch(0.269 0 0);
-  --input: oklch(0.269 0 0);
-  --ring: oklch(0.439 0 0);
+  --border: rgba(243, 240, 231, 0.12);
+  --input: rgba(243, 240, 231, 0.08);
+  --ring: #E2703B;
   --font-weight-medium: 500;
   --font-weight-normal: 400;
   --chart-1: oklch(0.488 0.243 264.376);
@@ -86,14 +81,14 @@
   --chart-3: oklch(0.769 0.188 70.08);
   --chart-4: oklch(0.627 0.265 303.9);
   --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(0.269 0 0);
-  --sidebar-ring: oklch(0.439 0 0);
+  --sidebar: #211C16;
+  --sidebar-foreground: #F3F0E7;
+  --sidebar-primary: #E2703B;
+  --sidebar-primary-foreground: #17140F;
+  --sidebar-accent: #2A241C;
+  --sidebar-accent-foreground: #F3F0E7;
+  --sidebar-border: rgba(243, 240, 231, 0.12);
+  --sidebar-ring: #E2703B;
 }
 
 /* @theme inline is Tailwind v4 only - CSS variable mappings are handled via tailwind.config.cjs instead */

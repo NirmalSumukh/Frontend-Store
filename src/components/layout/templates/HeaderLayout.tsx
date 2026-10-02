@@ -114,7 +114,7 @@ export default function HeaderLayout({
       >
         {announcementText && (
           <div className="w-full bg-white border-b border-gray-100 py-1.5 sm:py-2 text-center shadow-[0_2px_10px_rgba(0,0,0,0.02)]">
-            <p className="text-[#FF6B35] font-bold text-xs sm:text-sm uppercase tracking-wider">
+            <p className="text-primary font-bold text-xs sm:text-sm uppercase tracking-wider">
               {announcementText}
             </p>
           </div>
@@ -148,9 +148,9 @@ export default function HeaderLayout({
                     className={cn(
                       'px-3 lg:px-4 py-2 text-sm lg:text-base transition-all duration-200 relative',
                       'font-bold',
-                      'text-[#222222] hover:text-[#222222]',
+                      'text-foreground hover:text-foreground',
                       'flex items-center gap-1',
-                      'after:content-[""] after:absolute after:bottom-1 after:left-3 after:right-3 after:h-0.5 after:bg-[#FF6B35] after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-200'
+                      'after:content-[""] after:absolute after:bottom-1 after:left-3 after:right-3 after:h-0.5 after:bg-primary after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-200'
                     )}
                   >
                     {item.name}
@@ -178,7 +178,7 @@ export default function HeaderLayout({
                           <Link
                             key={category.slug}
                             to={`/catalog?category=${category.slug}`}
-                            className="block px-4 py-3 text-sm font-medium text-[#222222] hover:bg-gray-50 hover:text-[#FF6B35] transition-colors duration-200"
+                            className="block px-4 py-3 text-sm font-medium text-foreground hover:bg-secondary hover:text-primary transition-colors duration-200"
                           >
                             {category.name}
                           </Link>
@@ -196,7 +196,7 @@ export default function HeaderLayout({
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
                 onClick={() => onToggleSearch(true)}
-                className="p-2 text-[#222222] hover:text-[#FF6B35] transition-all duration-200"
+                className="p-2 text-foreground hover:text-primary transition-all duration-200"
               >
                 <Search className="w-5 h-5 stroke-[1.5]" />
               </motion.button>
@@ -207,14 +207,14 @@ export default function HeaderLayout({
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
                 onClick={onToggleCart}
-                className="relative p-2 text-[#222222] hover:text-[#FF6B35] transition-all duration-200"
+                className="relative p-2 text-foreground hover:text-primary transition-all duration-200"
               >
                 <ShoppingCart className="w-5 h-5 stroke-[1.5]" />
                 {totalItems > 0 && (
                   <motion.span
                     initial={{ scale: 0 }}
                     animate={{ scale: 1 }}
-                    className="absolute -top-1 -right-1 bg-[#FF6B35] text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center shadow-sm"
+                    className="absolute -top-1 -right-1 bg-primary text-primary-foreground text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center shadow-sm"
                   >
                     {totalItems}
                   </motion.span>
@@ -227,7 +227,7 @@ export default function HeaderLayout({
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.9 }}
                     onClick={onToggleUserMenu}
-                    className="p-2 text-[#222222] hover:text-[#FF6B35] transition-all duration-200"
+                    className="p-2 text-foreground hover:text-primary transition-all duration-200"
                   >
                     <User className="w-5 h-5 stroke-[1.5]" />
                   </motion.button>
@@ -242,7 +242,7 @@ export default function HeaderLayout({
                         className="absolute right-0 mt-2 w-56 bg-white border border-gray-200 rounded-xl shadow-xl overflow-hidden"
                       >
                         <div className="px-4 py-3 border-b border-gray-200">
-                          <p className="text-sm font-medium text-[#222222]">
+                          <p className="text-sm font-medium text-foreground">
                             {user?.firstName} {user?.lastName}
                           </p>
                           <p className="text-xs text-gray-500 truncate">
@@ -254,7 +254,7 @@ export default function HeaderLayout({
                           <Link
                             to="/account"
                             onClick={onToggleUserMenu}
-                            className="flex items-center gap-3 px-4 py-2 text-sm text-[#222222] hover:bg-gray-50 hover:text-[#FF6B35] transition-colors duration-200"
+                            className="flex items-center gap-3 px-4 py-2 text-sm text-foreground hover:bg-secondary hover:text-primary transition-colors duration-200"
                           >
                             <User className="w-4 h-4" />
                             My Account
@@ -264,7 +264,7 @@ export default function HeaderLayout({
                             <Link
                               to="/admin/dashboard"
                               onClick={onToggleUserMenu}
-                              className="flex items-center gap-3 px-4 py-2 text-sm text-[#222222] hover:bg-gray-50 hover:text-[#FF6B35] transition-colors duration-200"
+                              className="flex items-center gap-3 px-4 py-2 text-sm text-foreground hover:bg-secondary hover:text-primary transition-colors duration-200"
                             >
                               <Settings className="w-4 h-4" />
                               Admin Dashboard
@@ -289,7 +289,7 @@ export default function HeaderLayout({
                   size="sm"
                   // ✅ CHANGED: Opens modal instead of navigating to /login
                   onClick={onOpenLogin}
-                  className="hidden sm:inline-flex font-bold hover:scale-105 transition-transform bg-[#FF6B35] hover:bg-[#FF5722] text-white px-6 min-w-[90px]"
+                  className="hidden sm:inline-flex font-bold hover:scale-105 transition-transform bg-primary hover:bg-primary/90 text-primary-foreground px-6 min-w-[90px]"
                 >
                   Login
                 </Button>
@@ -299,7 +299,7 @@ export default function HeaderLayout({
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
                 onClick={onToggleMenu}
-                className="md:hidden p-2 text-[#222222] hover:text-[#FF6B35] transition-all duration-200"
+                className="md:hidden p-2 text-foreground hover:text-primary transition-all duration-200"
               >
                 {isMenuOpen ? (
                   <X className="w-6 h-6 stroke-[1.5]" />
@@ -325,7 +325,7 @@ export default function HeaderLayout({
                 <Link
                   to="/"
                   onClick={onToggleMenu}
-                  className="block px-4 py-3 rounded-lg font-bold text-[#222222] hover:text-[#FF6B35] hover:bg-gray-50 transition-all duration-200"
+                  className="block px-4 py-3 rounded-lg font-bold text-foreground hover:text-primary hover:bg-secondary transition-all duration-200"
                 >
                   Home
                 </Link>
@@ -334,7 +334,7 @@ export default function HeaderLayout({
                     {item.hasDropdown ? (
                       <button
                         onClick={() => setMobileExpanded(mobileExpanded === item.name ? null : item.name)}
-                        className="w-full flex items-center justify-between px-4 py-3 rounded-lg font-bold text-[#222222] hover:text-[#FF6B35] hover:bg-gray-50 transition-all duration-200"
+                        className="w-full flex items-center justify-between px-4 py-3 rounded-lg font-bold text-foreground hover:text-primary hover:bg-secondary transition-all duration-200"
                       >
                         {item.name}
                         <ChevronDown
@@ -348,7 +348,7 @@ export default function HeaderLayout({
                       <Link
                         to={item.href}
                         onClick={onToggleMenu}
-                        className="block px-4 py-3 rounded-lg font-bold text-[#222222] hover:text-[#FF6B35] hover:bg-gray-50 transition-all duration-200"
+                        className="block px-4 py-3 rounded-lg font-bold text-foreground hover:text-primary hover:bg-secondary transition-all duration-200"
                       >
                         {item.name}
                       </Link>
@@ -373,7 +373,7 @@ export default function HeaderLayout({
                               key={category.slug}
                               to={`/catalog?category=${category.slug}`}
                               onClick={onToggleMenu}
-                              className="block px-6 py-3 text-sm font-medium text-[#222222] hover:text-[#FF6B35] transition-colors duration-200"
+                              className="block px-6 py-3 text-sm font-medium text-foreground hover:text-primary transition-colors duration-200"
                             >
                               {category.name}
                             </Link>
@@ -390,7 +390,7 @@ export default function HeaderLayout({
                       onToggleMenu()
                       onOpenLogin()
                     }}
-                    className="block w-full text-left px-4 py-3 rounded-lg font-bold text-white bg-[#FF6B35] hover:bg-[#FF5722] transition-all duration-200"
+                    className="block w-full text-left px-4 py-3 rounded-lg font-bold text-primary-foreground bg-primary hover:bg-primary/90 transition-all duration-200"
                   >
                     Login
                   </button>
@@ -427,7 +427,7 @@ export default function HeaderLayout({
                     value={searchQuery}
                     onChange={(e) => onSearchChange?.(e.target.value)}
                     placeholder="Search products..."
-                    className="w-full pl-12 pr-12 py-3 rounded-xl bg-gray-50 border border-transparent focus:bg-white focus:border-[#FF6B35] text-[#222222] placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#FF6B35]/20 transition-all font-medium"
+                    className="w-full pl-12 pr-12 py-3 rounded-xl bg-gray-50 border border-transparent focus:bg-white focus:border-primary text-foreground placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all font-medium"
                     autoFocus
                     onKeyDown={(e) => {
                       if (e.key === 'Escape') onToggleSearch(false)

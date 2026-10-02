@@ -1,10 +1,9 @@
 export default function GeometricBackground() {
-  const color = "border-cyan-400/50";
-  const bgColor = "bg-cyan-400/50";
+  const color = "border-[#B8441C]/15";
+  const bgColor = "bg-[#B8441C]/15";
 
   return (
-    // Increased opacity from 40 to 60 for better visibility
-    <div className="fixed inset-0 pointer-events-none z-0 opacity-60 overflow-hidden">
+    <div className="hidden md:block fixed inset-0 pointer-events-none z-0 opacity-60 overflow-hidden">
       
       {/* Top Left */}
       <div className={`absolute top-0 left-0 w-32 h-32 border-l-2 border-t-2 ${color}`}></div>
