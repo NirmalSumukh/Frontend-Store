@@ -35,7 +35,7 @@ function PriceDisplay({ price, currency, style }: { price: number; currency: str
     <span style={style}>
       {main}
       {decimal && (
-        <span style={{ fontSize: '0.55em', verticalAlign: 'super', fontWeight: 400, opacity: 0.75 }}>
+        <span style={{ fontSize: '0.55em', verticalAlign: 'baseline', fontWeight: 400, opacity: 0.75 }}>
           {decimal}
         </span>
       )}
