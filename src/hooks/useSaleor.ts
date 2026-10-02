@@ -378,7 +378,7 @@ export const useProductSearch = (query: string) => {
     variables: {
       channel: currentChannel || "customer-channel",
     },
-    skip: !query || query.length < 2,
+    skip: !query || query.trim().length < 1,
     fetchPolicy: 'cache-first',
   })
 
@@ -388,15 +388,27 @@ export const useProductSearch = (query: string) => {
     }
 
     const lowerQuery = query.toLowerCase().trim()
+    if (!lowerQuery) return []
+
     return data.products.edges
       .filter((edge: any) => {
         const product = edge.node
-        const searchableText = [
-          product.name || '',
-          product.slug || '',
-          product.category?.name || '',
-        ].join(' ').toLowerCase()
-        return searchableText.includes(lowerQuery)
+        const name = (product.name || '').toLowerCase()
+        const slug = (product.slug || '').toLowerCase()
+        const category = (product.category?.name || '').toLowerCase()
+
+        // Word-prefix match: any word in name/category starts with the query
+        const allWords = [...name.split(/\s+/), ...category.split(/\s+/)]
+        if (allWords.some(word => word.startsWith(lowerQuery))) return true
+
+        // For 2+ char queries also do a full substring search
+        if (lowerQuery.length >= 2) {
+          if (name.includes(lowerQuery) || slug.includes(lowerQuery) || category.includes(lowerQuery)) {
+            return true
+          }
+        }
+
+        return false
       })
       .map((edge: any) => edge.node)
   }, [data, query])
