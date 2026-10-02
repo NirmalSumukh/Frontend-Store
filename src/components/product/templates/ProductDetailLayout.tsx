@@ -1,3 +1,4 @@
+import type React from 'react'
 import { formatPrice } from '@/lib/utils'
 import ProductGallery from '../gallery/ProductGallery'
 import ProductInfo from '../info/ProductInfo'
@@ -23,6 +24,23 @@ interface ProductDetailLayoutProps {
   onScreenTypeSelect: (type: string) => void
   onBuyNow: () => void
   onAddToCart: () => void
+}
+
+function PriceDisplay({ price, currency, style }: { price: number; currency: string; style: React.CSSProperties }) {
+  const formatted = formatPrice(price, currency)
+  const dotIndex = formatted.lastIndexOf('.')
+  const main = dotIndex >= 0 ? formatted.slice(0, dotIndex) : formatted
+  const decimal = dotIndex >= 0 ? formatted.slice(dotIndex) : ''
+  return (
+    <span style={style}>
+      {main}
+      {decimal && (
+        <span style={{ fontSize: '0.55em', verticalAlign: 'super', fontWeight: 400, opacity: 0.75 }}>
+          {decimal}
+        </span>
+      )}
+    </span>
+  )
 }
 
 export default function ProductDetailLayout({
@@ -103,18 +121,19 @@ export default function ProductDetailLayout({
               // --- DISCOUNT VIEW ---
               <div style={{ display: 'flex', alignItems: 'flex-end', gap: '12px', flexWrap: 'wrap' }}>
                 {/* 1. Main Selling Price (RED) */}
-                <div style={{ fontSize: '36px', fontWeight: '800', color: '#dc2626', lineHeight: '1' }}>
-                  {formatPrice(price, currency)}
+                <div style={{ lineHeight: '1' }}>
+                  <PriceDisplay price={price} currency={currency} style={{ fontSize: '36px', fontWeight: '500', color: '#dc2626' }} />
                 </div>
 
                 {/* 2. List Price (Strikethrough) */}
                 <div style={{
                   fontSize: '18px',
+                  fontWeight: '400',
                   color: '#9ca3af',
                   textDecoration: 'line-through',
                   marginBottom: '6px'
                 }}>
-                  {formatPrice(listPrice, currency)}
+                  <PriceDisplay price={listPrice} currency={currency} style={{ fontSize: '18px', fontWeight: '400', color: '#9ca3af' }} />
                 </div>
 
                 {/* 3. Discount Badge */}
@@ -134,8 +153,8 @@ export default function ProductDetailLayout({
               </div>
             ) : (
               // --- STANDARD VIEW (No Discount) ---
-              <div style={{ fontSize: '36px', fontWeight: '700', color: '#111827' }}>
-                {formatPrice(price, currency)}
+              <div style={{ lineHeight: '1' }}>
+                <PriceDisplay price={price} currency={currency} style={{ fontSize: '36px', fontWeight: '500', color: '#111827' }} />
               </div>
             )}
 
